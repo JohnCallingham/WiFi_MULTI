@@ -1,27 +1,20 @@
 #include "ArduinoJson.h"
 
-class WiFiMultiError {
-
-
-};
-
 class WiFi_Multi {
   public:
     WiFi_Multi(const char* credentials);
 
-    //WiFi_Multi(const char* & fred) {}
+    void printCredentials();
 
-    WiFi_Multi() {}
-
-    void addCredentials(const char* credentials) {}
-    
-
+    /**
+     * Returns the matching JsonObject if ssid is in the credentials JSON.
+     * Throws an invalid_argument exception if not found.
+     */
+    JsonObject scanNetworks();
 
   private:
     const char* credentials;
 
-
-
+    JsonDocument doc;
 
 };
-
