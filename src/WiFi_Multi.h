@@ -6,8 +6,7 @@ class WiFi_Multi_Error {
       Ok,
       DeserialisationError,
       NoWiFiNetworks,
-      NoMatch,
-      WiFiError //used ??
+      NoMatch
     };
 
     // Returns true if there is an error
@@ -16,7 +15,7 @@ class WiFi_Multi_Error {
     }
 
     const char* c_str() const {
-      static const char* messages[] = {"Ok", "DeserialisationError", "NoWiFiNetworks", "NoMatch", "WiFiError"};
+      static const char* messages[] = {"Ok", "DeserialisationError", "NoWiFiNetworks", "NoMatchingSSID"};
       return messages[returnCode];
     }
 
