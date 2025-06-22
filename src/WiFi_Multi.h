@@ -2,7 +2,7 @@
 
 class WiFi_Multi_Error {
   public:
-    enum errorCode {
+    enum ReturnCode {
       Ok,
       DeserialisationError,
       NoWiFiNetworks,
@@ -12,46 +12,48 @@ class WiFi_Multi_Error {
 
     // Returns true if there is an error
     explicit operator bool() const {
-      return code != errorCode::Ok;
-      //return false;
-  }
+      return returnCode != ReturnCode::Ok;
+    }
 
-    errorCode code;
+    const char* c_str() const {
+      static const char* messages[] = {"Ok", "DeserialisationError", "NoWiFiNetworks", "NoMatch", "WiFiError"};
+      return messages[returnCode];
+    }
+
+    ReturnCode returnCode;
 
   private:
-    //errorCode code;
 
 };
 
 class WiFi_Multi {
   public:
-    //WiFi_Multi(const char* credentials);
-    WiFi_Multi() {};
-
+    /**
+     * Actions;-
+     *  1. Deserialises the credentials JSON file.
+     *  2. Scans the available WiFi networks.
+     *  3. Checks for a matching SSID between the credentials and the WiFi networks scanned.
+     * If a match is found, the matching name, SSID and password are stored for later access.
+     * The returned WiFi_Multi_Error object indicates success or failure.
+     */
     WiFi_Multi_Error findMatchingSSID(const char* credentials);
 
-    const char* getFoundName() { return this->foundName; }
-    const char* getFoundSSID() { return this->foundSSID; }
-    const char* getFoundPassword() { return this->foundPassword; }
-
-
-    //void printCredentials();
-
     /**
-     * Returns the matching JsonObject if ssid is in the credentials JSON.
-     * Throws an invalid_argument exception if not found.
+     * Methods to access the name, SSID and password of matching SSID.
      */
-    //JsonObject scanNetworks();
+    const char* getMatchingName() { return this->matchingName; }
+    const char* getMatchingSSID() { return this->matchingSSID; }
+    const char* getMatchingPassword() { return this->matchingPassword; }
 
   private:
-    const char* credentials;
-
+    // Used to deserialise the credentials JSON.
     JsonDocument doc;
-  
+
+    // Used to return the success or failure message.
     WiFi_Multi_Error error;
 
-    const char* foundName;
-    const char* foundSSID;
-    const char* foundPassword;
-
+    // Used to store the matching name, SSID and password.
+    const char* matchingName;
+    const char* matchingSSID;
+    const char* matchingPassword;
 };

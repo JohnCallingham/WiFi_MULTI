@@ -1,8 +1,8 @@
 {
   "name": "WiFi_MULTI",
   "version": "0.0.0+20250621194308",
-"dependencies":
-  {
-    "ArduinoJson": "bblanchon/ArduinoJson@^7.4.1"
-  }
+  "dependencies":
+    {
+      "ArduinoJson": "bblanchon/ArduinoJson@^7.4.1"
+    }
 }
