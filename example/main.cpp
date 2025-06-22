@@ -1,11 +1,31 @@
 /**
  * Wifi_Multi
  * A way to allow an esp32 to automatically connect to different WiFi APs depending on location. 
- * Keep a json format file credentials.h with name, ssid and password combinations.  Poss one is a favourite.
+ * Keep a JSON format file credentials.h with name, ssid and password combinations.
  * On start up;-
- *  1. Do a wifi scan and return all ssids in range.
- *  2. Check the json file to see if any ssid in range is in the file.
+ *  1. Do a WiFi scan and return all SSIDs in range.
+ *  2. Check the JSON credentials file to see if any SSID in range is in the file.
  *  3. If so, use its password to connect.
+ * Format of credentials.h;-
+ * const char* credentials = R"===(
+ * [
+ *   {
+ *     "name":"FirstAP",
+ *     "ssid":"FirstSSID",
+ *     "password":"FirstPassword"
+ *   },
+ *   {
+ *     "name":"SecondAP",
+ *     "ssid":"SecondSSID",
+ *     "password":"SecondPassword"
+ *   },
+ *   {
+ *     "name":"ThirdAP",
+ *     "ssid":"ThirdSSID",
+ *     "password":"ThirdPassword"
+ *   }
+ * ]
+ * )===";
  */
 #include <Arduino.h>
 #include <WiFi.h>
