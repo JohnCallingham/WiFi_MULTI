@@ -17,6 +17,21 @@ WiFi_Multi::WiFi_Multi(const char* credentials) {
   }
 }
 
+WiFi_Multi_Error WiFi_Multi::findMatchingSSID(const char* credentials) {
+  WiFi_Multi_Error error;
+
+  // Deserialise the credentials JSON.
+
+  // Scan the WiFi networks.
+
+  // Check for an SSID found in the scan which we have a match for in the credentials.
+
+  // If an error occurs, store the cause and return. If no error, returen false.
+  
+  return error;
+
+}
+
 JsonObject WiFi_Multi::scanNetworks() {
   WiFi.mode(WIFI_STA);
 
