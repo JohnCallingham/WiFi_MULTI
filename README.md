@@ -1,11 +1,9 @@
 # WiFi_MULTI
 
-This library has been designed to be part of the ESP32_2Servo_2Frog_2TOTI_WiFi program. It is part of a suite of libraries which can be used as part of an OpenLCB/LCC node.
+The file WiFi_Multi.h contains two classes WiFi_Multi and WiFi_Multi_Error.
+
+The function WiFi_Multi::findMatchingSSID() searches for an SSID which matches one of the SSIDs in a configuration file. It returns a WiFi_Multi_Error object which will indicate success or failure.
+
+This allows programs to work with differing WiFi Access Points without having to recompile.
 
 This library has been developed using PlatformIO.
-
-This library allows multiple WiFi SSIDs to be specified so that any can be connected to if they are in range.
-
-It can be installed in PlatformIO by updating platform.ini by editing lib_deps as below;
-
-lib_deps = https://github.com/JohnCallingham/WiFi_MULTI.git
