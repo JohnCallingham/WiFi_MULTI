@@ -17,6 +17,26 @@ WiFi_Multi_Error WiFi_Multi::findMatchingSSID(const char* credentials) {
   Serial.printf("\n%6ld WiFi_Multi: Successfully deserialised credentials", millis());
 
   /**
+   * If there is only one WiFi network in the JSON credentials file then 
+   * there is no need to scan the WiFi networks.
+   * Just attempt to connect to the one WiFi network in the JSON credentials file.
+   */
+  // Convert the JsonDocument to a JsonArray so that we can check its size.
+  JsonArray jarray = doc.as<JsonArray>();
+  if (jarray.size() == 1) {
+    // There is only one WiFi network in the JSON credentials file so
+    // store the matching name, SSID and password so it can be accessed later.
+    for (JsonObject elem : jarray) { // Need a better way of converting from a JsonArray to a JsonObject.
+      this->matchingName = elem["name"];
+      this->matchingSSID = elem["ssid"];
+      this->matchingPassword = elem["password"];
+    }
+
+    wifi_Multi_Error.returnCode = WiFi_Multi_Error::ReturnCode::Ok;
+    return wifi_Multi_Error;
+  }
+
+  /**
    * Scan the WiFi networks.
    */
   Serial.printf("\n%6ld WiFi_Multi: Scanning WiFi networks", millis());
